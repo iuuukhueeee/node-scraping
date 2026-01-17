@@ -13,6 +13,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@types/bull": "^3.15.9",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.9",
     "@types/pg": "^8.16.0",

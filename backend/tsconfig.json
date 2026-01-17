@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "node20",
     "esModuleInterop": true,
-    "target": "es6",
-    "moduleResolution": "bundler",
+    "target": "es2023",
+    "moduleResolution": "node16",
     "sourceMap": true,
     "outDir": "dist"
   },

@@ -2,6 +2,7 @@ import { Worker } from 'bullmq'
 
 import axios from 'axios';
 import * as cheerio from 'cheerio'
+import { prisma } from './lib/prisma';
 
 const worker = new Worker('media-scraper', async (job) => {
   const { url } = job.data;
@@ -16,11 +17,11 @@ const worker = new Worker('media-scraper', async (job) => {
     $('img').each((_, el) => {
       const src = $(el).attr('src');
       if (src) results.push({
-        sourceUrl: url,
-        mediaUrl: new URL(src, url).href,
-        mediaType: 'image',
-        altText: $(el).attr('alt') || '',
-        fileName: src.split('/').pop() || 'image'
+        source_url: url,
+        media_url: new URL(src, url).href,
+        media_type: 'image',
+        alt_text: $(el).attr('alt') || '',
+        file_name: src.split('/').pop() || 'image'
       });
     });
 
@@ -31,10 +32,11 @@ const worker = new Worker('media-scraper', async (job) => {
         try {
           const absoluteUrl = new URL(src, url).href;
           results.push({
-            mediaUrl: absoluteUrl,
-            mediaType: 'video',
-            fileName: src.split('/').pop().split('?')[0] || 'unknown.mp4',
-            altText: null
+            source_url: url,
+            media_url: absoluteUrl,
+            media_type: 'video',
+            file_name: src.split('/').pop().split('?')[0] || 'unknown.mp4',
+            alt_text: ''
           });
         } catch (e) {
           // Invalid URL, skip
@@ -43,15 +45,25 @@ const worker = new Worker('media-scraper', async (job) => {
     });
 
     // Bulk save to SQL for efficiency
-    // if (results.length) await Media.bulkCreate(results);
+    if (results.length) await prisma.media.createMany({
+      data: results
+    })
 
     // if (results.length) console.log(results)
 
     // console.log(`process ${url} done`)
 
   } catch (err) {
-    console.log(err)
-    // await Media.create({ sourceUrl: url, errors: err.message });
+    await prisma.media.create({
+      data: {
+        source_url: url,
+        media_url: "",
+        alt_text: "",
+        file_name: "",
+        media_type: "",
+        errors: err.message
+      }
+    });
   }
 }, {
   connection: { host: 'localhost', port: 6379 },
