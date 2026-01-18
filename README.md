@@ -146,7 +146,7 @@ curl http://localhost:3001/api/media?media_type=video
 - `DATABASE_URL` - PostgreSQL connection string
 - `REDIS_HOST` - Redis hostname (default: localhost)
 - `REDIS_PORT` - Redis port (default: 6379)
-- `MAX_CONCURRENT_SCRAPES` - Concurrent jobs (default: 50)
+- `MAX_CONCURRENT_SCRAPES` - Concurrent jobs (default: 10)
 - `REQUEST_TIMEOUT` - HTTP request timeout in ms (default: 30000)
 
 **Docker Compose:**
@@ -160,7 +160,7 @@ curl http://localhost:3001/api/media?media_type=video
 The system is designed to handle ~5000 scraping requests with:
 
 - **Job Queue (Redis/BullMQ)**: Queues all jobs for async processing
-- **Concurrency Control**: Configurable worker concurrency (default: 50)
+- **Concurrency Control**: Configurable worker concurrency (default: 10)
 - **Database Optimization**: Bulk inserts for efficiency
 - **Resource Limits**: Docker constraints to 512MB RAM, 1 CPU
 - **Timeout Handling**: 5-second timeout per URL + error logging
@@ -282,14 +282,6 @@ npx prisma studio
 
 - **Max URLs per request**: 5000
 - **Request timeout**: 5 seconds per URL
-- **Concurrent jobs**: Configurable (default: 50)
+- **Concurrent jobs**: Configurable (default: 10)
 - **Memory**: 512MB backend, 256MB database
 - **CPU**: 1 core for backend
-
-## License
-
-ISC
-
-## Demo
-
-For a demo video showing the application in action, see [DEMO.md](./DEMO.md).

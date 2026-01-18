@@ -55,13 +55,6 @@ Response Time: 1234ms
 - **400 Bad Request**: Invalid request format
 - **500 Server Error**: Internal error
 
-### Processing Time (Post-Queue)
-
-After URLs are queued:
-1. Each URL waits in Redis queue
-2. Workers process them based on `MAX_CONCURRENT_SCRAPES` (default: 50)
-3. For 5000 URLs at 50 concurrent: ~100 jobs × average 2-5 seconds = ~5-10 minutes total
-
 ## Performance Monitoring
 
 ### Monitor Processing Progress
