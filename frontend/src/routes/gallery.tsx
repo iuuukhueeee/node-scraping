@@ -164,7 +164,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className="text-left">
+    <div className="text-left flex flex-col">
       {/* Filters */}
       <div className="sticky top-0 z-10 bg-white p-4 mb-4 border-b border-gray-200 shadow-sm flex flex-col sm:flex-row gap-4">
         {/* Search */}
