@@ -32,6 +32,14 @@ scraper/
 └── README.md
 ```
 
+## Low level design
+
+![LLD](./LLD.png)
+
+## High level design
+
+![HLD](./HLD.png)
+
 ## Quick Start
 
 ### Prerequisites
@@ -269,14 +277,6 @@ npx prisma studio
 ### Redis Connection Issues
 - Verify Redis service is running
 - Check REDIS_HOST and REDIS_PORT in backend environment
-
-## Performance Tips
-
-1. **Increase Concurrency**: Adjust `MAX_CONCURRENT_SCRAPES` based on available resources
-2. **Bulk Operations**: Uses `createMany()` for efficient database writes
-3. **Connection Pooling**: Configured with Prisma
-4. **Request Timeout**: Set to 5 seconds to prevent hanging
-5. **Resource Monitoring**: Docker limits ensure stable operation
 
 ## Limits
 
