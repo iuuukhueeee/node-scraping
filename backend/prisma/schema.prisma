@@ -22,6 +22,4 @@ model Media {
   alt_text String
   created_at DateTime @default(now())
   errors String?
-
-  @@index([alt_text])
 }
