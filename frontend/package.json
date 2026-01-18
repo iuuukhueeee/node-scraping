@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-router": "^1.150.0",
+    "@tanstack/react-table": "^8.21.3",
     "axios": "^1.13.2",
     "lucide-react": "^0.562.0",
     "react": "^19.1.0",
