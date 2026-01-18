@@ -46,7 +46,7 @@ function RouteComponent() {
         .filter((line) => line.length > 0);
 
       // Replace with your actual API endpoint
-      const response = await axios.post(`${API}/scrape`, {
+      await axios.post(`${API}/scrape`, {
         urls: urlList,
       });
 

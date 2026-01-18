@@ -6,13 +6,13 @@ import { prisma } from './lib/prisma';
 
 const app = express()
 app.use(cors())
-app.use((express.json({ limit: '5mb' }))) // Increase limit for 5k URLs
+app.use((express.json({ limit: '10mb' }))) // Increase limit for 5k URLs
 
-app.listen(process.env.PORT as unknown as number, 'localhost')
-console.log(`🚀 Server running on port ${process.env.PORT}`);
+app.listen(process.env.PORT || 3001)
+console.log(`🚀 Server running on port ${process.env.PORT || 3001}`);
 
 const scrapeQueue = new Queue('media-scraper', {
-  connection: { host: 'localhost', port: 6379 }
+  connection: { host: process.env.REDIS_HOST || 'localhost', port: Number(process.env.REDIS_PORT) || 6379 }
 });
 
 

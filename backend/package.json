@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite-node main.ts"
+    "start-main": "vite-node main.ts",
+    "start-worker": "vite-node worker.ts",
+    "start": "npm run start-main & npm run start-worker",
   },
   "keywords": [],
   "author": "",

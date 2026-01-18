@@ -6,7 +6,6 @@ import { prisma } from './lib/prisma';
 
 const worker = new Worker('media-scraper', async (job) => {
   const { url } = job.data;
-  console.log(url.length)
 
   try {
     const { data } = await axios.get(url, { timeout: 5000 });
@@ -66,6 +65,6 @@ const worker = new Worker('media-scraper', async (job) => {
     });
   }
 }, {
-  connection: { host: 'localhost', port: 6379 },
-  concurrency: 10 // Only 10 URLs at a time to stay under 1GB RAM
+  connection: { host: process.env.REDIS_HOST || 'localhost', port: Number(process.env.REDIS_PORT) || 6379 },
+  concurrency: Number(process.env.MAX_CONCURRENT_SCRAPES) // Only 10 URLs at a time to stay under 1GB RAM
 })
