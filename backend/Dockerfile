@@ -15,8 +15,8 @@ RUN chmod +x docker-entrypoint.sh
 CMD ["./docker-entrypoint.sh"]
 
 
-# # Generate Prisma client
-# RUN npx prisma generate
+# Generate Prisma client
+RUN npx prisma generate
 # RUN npx prisma migrate deploy
 # # RUN npm run migrate
 

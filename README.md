@@ -73,6 +73,7 @@ The application will be available at:
 ```bash
 cd backend
 npm install
+npx prisma generate
 npm run start-main &      # Start API server
 npm run start-worker &    # Start job worker
 ```
